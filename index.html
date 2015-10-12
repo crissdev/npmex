@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>npm explorer</title>
+  <meta name="viewport" content="initial-scale=1">
+  <link href="favicon.ico" rel="icon" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+  <link href="assets/main.css" rel="stylesheet">
+  <style>[ng-cloak], .ng-cloak, .ng-hide:not(.ng-hide-animate) { display: none !important; }</style>
+</head>
+<body class="ng-cloak" layout="row" md-theme="{{$root.currentTheme}}" ui-view>
+
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+<script src="app-bundle.js"></script>
+<script>
+  (function() {
+    'use strict';
+    function onDomReady() {
+      document.removeEventListener('DOMContentLoaded', onDomReady);
+
+      System.import('app')
+        .then(function(app) {
+          return app.bootstrap();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+    document.addEventListener('DOMContentLoaded', onDomReady);
+  })();
+</script>
+</body>
+</html>
