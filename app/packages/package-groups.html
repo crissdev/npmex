@@ -1,0 +1,12 @@
+<md-grid-list md-gutter="1em" md-row-height="200px" md-cols="4" md-cols-lg="3" md-cols-md="3" md-cols-sm="1">
+  <md-grid-tile ng-repeat="packageGroup in packageGroupsCtrl.packageGroups" class="package-group__item"
+                ng-click="$root.$state.go('app.packages', {group: packageGroup.name})">
+    <div layout="column" layout-padding>
+      <div layout="row" layout-align="center center" layout-padding>
+        <img ng-src="{{packageGroup.logoUrl}}" ng-attr-alt="{{packageGroup.title}}"/>
+        <span class="md-title" style="padding-left: 8px">{{packageGroup.title}}</span>
+      </div>
+      <span style="text-align: center" class="md-body-1">{{packageGroup.description}}</span>
+    </div>
+  </md-grid-tile>
+</md-grid-list>

@@ -1,0 +1,24 @@
+<div class="packages-page"
+     infinite-scroll="packagesCtrl.nextItems()"
+     infinite-scroll-immediate-check="true"
+     infinite-scroll-disabled="busy"
+     infinite-scroll-container="'.scrollable-page-content'">
+
+    <div ng-repeat="packageItem in packagesCtrl.packages | filter:$root.searchFilter | limitTo:packagesCtrl.maxItems track by packageItem.name" class="packages-page__item-container" layout="column">
+      <div layout="row" layout-align="center center">
+        <a class="md-display-1 packages-page__item-title" ng-href="{{packageItem.homepage}}" target="_blank">
+          {{packageItem.name}}
+        </a>
+      </div>
+
+      <span ng-if="packageItem.description" class="md-body-1" style="color: #777; margin-top: 8px;">{{packageItem.description}}</span>
+
+      <div class="md-body-2" ng-if="packageItem.version || packageItem.license" flex layout="row" layout-align="center center" layout-padding>
+        <span ng-if="packageItem.version">{{packageItem.version}}</span>
+        <span ng-if="packageItem.version && packageItem.license" style="padding: 0 1em;"> | </span>
+        <span ng-if="packageItem.license">{{packageItem.license}}</span>
+      </div>
+
+    </div>
+
+</div>

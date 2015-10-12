@@ -1,0 +1,71 @@
+<div flex layout="row">
+
+  <md-sidenav md-component-id="primary" md-is-locked-open="$mdMedia('gt-md')" class="md-sidenav-left md-whiteframe-16dp">
+    <md-toolbar layout="column" class="md-tall md-hue-2" md-theme-watch>
+      <div class="md-toolbar-tools">
+        <h3>npm explorer</h3>
+        <div flex></div>
+      </div>
+    </md-toolbar>
+
+    <md-content class="md-padding" layout="column" flex>
+      <md-menu-content width="2" flex style="max-height: 100%">
+        <md-menu-item>
+          <md-button ng-click="$state.go('app.package-groups')"
+                     ng-class="{'md-accent': $state.is('app.package-groups')}">
+            <md-icon md-font-icon="material-icons" md-menu-align-target>cloud</md-icon>
+            <span>Package Groups</span>
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-repeat="packageGroup in shellCtrl.packageGroups">
+          <md-button ng-click="$state.go('app.packages', {group: packageGroup.name})"
+                     ng-class="{'md-accent': $state.is('app.packages', {group: packageGroup.name})}">
+            <md-icon md-font-icon="material-icons" md-menu-align-target>link</md-icon>
+            <span>{{::packageGroup.title}}</span>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+      <md-menu-content width="2" style="border-top: 1px solid rgba(0, 0, 0, 0.18)">
+        <md-menu-item>
+          <md-button ng-click="$state.go('app.settings')" ng-class="{'md-accent': $state.is('app.settings')}">
+            <md-icon md-font-icon="material-icons" md-menu-align-target>settings</md-icon>
+            <span>Settings</span>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-content>
+
+  </md-sidenav>
+
+  <div layout="column" flex>
+    <md-toolbar class="md-whiteframe-4dp" layout="row" md-theme-watch>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" hide-gt-md ng-click="shellCtrl.openSidenav()" ng-if="!shellCtrl.searchVisible">
+          <md-icon md-font-icon="material-icons">menu</md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" hide-gt-md ng-click="shellCtrl.hideSearch()" ng-if="shellCtrl.searchVisible">
+          <md-icon md-font-icon="material-icons">arrow_back</md-icon>
+        </md-button>
+
+        <h3>{{$root.currentSection.title || 'Package Groups'}}&nbsp;</h3>
+
+        <small style="font-size: .9rem" ng-if="$root.currentSection.subtitle">({{$root.currentSection.subtitle}})</small>
+
+        <div layout="row" layout-padding layout-align="start center" flex class="search-container" ng-if="!$state.is('app.package-groups') && !$state.is('app.settings')" hide-sm>
+          <input type="search" ng-model="$root.searchFilter" ng-model-options="{debounce: 300}" flex class="search-input" placeholder="Search">
+        </div>
+
+        <div flex ng-if="!$state.is('app.package-groups') && !$state.is('app.settings')" hide-gt-sm></div>
+
+        <!--<md-button class="md-icon-button" hide-gt-sm ng-if="!$state.is('app.package-groups') && !$state.is('app.settings')" ng-click="shellCtrl.showSearch()">-->
+          <!--<md-icon md-font-icon="material-icons">search</md-icon>-->
+        <!--</md-button>-->
+
+      </div>
+    </md-toolbar>
+
+    <md-content class="md-padding scrollable-page-content" ui-view></md-content>
+  </div>
+</div>
