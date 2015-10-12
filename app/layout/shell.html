@@ -11,7 +11,7 @@
     <md-content class="md-padding" layout="column" flex>
       <md-menu-content width="2" flex style="max-height: 100%">
         <md-menu-item>
-          <md-button ng-click="$state.go('app.package-groups')"
+          <md-button ng-click="shellCtrl.navigate('app.package-groups')"
                      ng-class="{'md-accent': $state.is('app.package-groups')}">
             <md-icon md-font-icon="material-icons" md-menu-align-target>cloud</md-icon>
             <span>Package Groups</span>
@@ -19,7 +19,7 @@
         </md-menu-item>
 
         <md-menu-item ng-repeat="packageGroup in shellCtrl.packageGroups">
-          <md-button ng-click="$state.go('app.packages', {group: packageGroup.name})"
+          <md-button ng-click="shellCtrl.navigate('app.packages', {group: packageGroup.name})"
                      ng-class="{'md-accent': $state.is('app.packages', {group: packageGroup.name})}">
             <md-icon md-font-icon="material-icons" md-menu-align-target>link</md-icon>
             <span>{{::packageGroup.title}}</span>
@@ -28,7 +28,7 @@
       </md-menu-content>
       <md-menu-content width="2" style="border-top: 1px solid rgba(0, 0, 0, 0.18)">
         <md-menu-item>
-          <md-button ng-click="$state.go('app.settings')" ng-class="{'md-accent': $state.is('app.settings')}">
+          <md-button ng-click="shellCtrl.navigate('app.settings')" ng-class="{'md-accent': $state.is('app.settings')}">
             <md-icon md-font-icon="material-icons" md-menu-align-target>settings</md-icon>
             <span>Settings</span>
           </md-button>

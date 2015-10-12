@@ -11,19 +11,14 @@ export function ShellController($rootScope, $state, $mdSidenav, Packages) {
 
   this.packageGroups = Packages.getPackageGroups();
   this.navigate = navigate;
-  this.isSameState = isSameState;
   this.openSidenav = () => $mdSidenav('primary').open();
 
 
   // region Implementation
 
-  function navigate(stateName, groupName = '') {
-    return $state.go(stateName, {group: groupName})
+  function navigate(stateName, params) {
+    return $state.go(stateName, params)
       .then(() => $mdSidenav('primary').close());
-  }
-
-  function isSameState(stateOrName, params, options) {
-    return $state.is(stateOrName, params, options);
   }
 
   // endregion
