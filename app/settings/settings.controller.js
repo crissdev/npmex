@@ -2,14 +2,15 @@
 
 SettingsController.$inject = [
   '$rootScope',
-  '$mdDialog'
+  '$mdDialog',
+  '$window'
 ];
-export function SettingsController($rootScope, $mdDialog) {
+export function SettingsController($rootScope, $mdDialog, $window) {
   $rootScope.currentTheme = 'npmex';
   $rootScope.currentSection = {title: 'Settings'};
 
   this.clearCache = () => {
-    window.localStorage.clear();
+    $window.localStorage.clear();
     $mdDialog.show($mdDialog
         .alert()
         .title('npm explorer')
