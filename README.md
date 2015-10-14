@@ -8,6 +8,21 @@ This app is currently under development, so just a few package groups have been 
 - [JSPM](http://kasperlewau.github.io/registry/)
 - [Yeoman](http://yeoman.io/generators/)
 
+## Usage
+
+Installing the dependancies.
+
+```shell
+$ npm install
+$ ./node_modules/.bin/jspm update
+```
+
+Running the service.
+
+```shell
+$ npm start  # Available on localhost:4000
+```
+
 
 ## License
 
