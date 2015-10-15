@@ -1,12 +1,14 @@
 'use strict';
 
 import 'angular-material/angular-material.css!';
+import 'angular-loading-bar/src/loading-bar.css!';
 import angular from 'angular';
 import 'angular-animate';
 import 'angular-aria';
 import 'angular-material';
 import 'angular-ui-router';
 import 'infinite-scroll';
+import 'angular-loading-bar';
 
 
 export const MODULE_NAME = 'npmex';
@@ -38,6 +40,7 @@ angular
     'ngAria',
     'ngMaterial',
 
+    'cfp.loadingBar',
     'infinite-scroll',
     'ui.router'
   ])

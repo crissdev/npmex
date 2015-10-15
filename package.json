@@ -8,14 +8,12 @@
     "node-watch": "^0.3.4",
     "tiny-lr": "^0.2.0"
   },
-  "scripts": {
-    "start": "node mock-server.js"
-  },
   "jspm": {
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.7",
       "angular-animate": "github:angular/bower-angular-animate@^1.4.7",
       "angular-aria": "github:angular/bower-angular-aria@^1.4.7",
+      "angular-loading-bar": "github:chieffancypants/angular-loading-bar@^0.8.0",
       "angular-material": "github:angular/bower-material@^0.11.2",
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.15",
       "clean-css": "npm:clean-css@^3.4.5",

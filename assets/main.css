@@ -1,8 +1,5 @@
 @charset "utf-8";
 
-.packages-page {
-
-}
 .packages-page__item-container {
   padding: 40px 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.18);
@@ -50,7 +47,6 @@ a.packages-page__item-title:hover, a.packages-page__item-title:active {
   color: rgba(0, 0, 0, 0.870588);
   font-size: 1.1rem;
 }
-
-.settings-page .md-title {
-  padding: 8px;
+#loading-bar .bar, #loading-bar .peg {
+  height: 4px !important;
 }

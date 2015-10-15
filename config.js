@@ -40,14 +40,15 @@ System.config({
     "angular": "github:angular/bower-angular@1.4.7",
     "angular-animate": "github:angular/bower-angular-animate@1.4.7",
     "angular-aria": "github:angular/bower-angular-aria@1.4.7",
-    "angular-material": "github:angular/bower-material@0.11.3",
+    "angular-loading-bar": "github:chieffancypants/angular-loading-bar@0.8.0",
+    "angular-material": "github:angular/bower-material@0.11.4",
     "angular-messages": "github:angular/bower-angular-messages@1.4.7",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.7",
     "angular-sanitize": "github:angular/bower-angular-sanitize@1.4.7",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.15",
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
-    "clean-css": "npm:clean-css@3.4.5",
+    "clean-css": "npm:clean-css@3.4.6",
     "core-js": "npm:core-js@1.2.1",
     "css": "github:systemjs/plugin-css@0.1.18",
     "infinite-scroll": "github:sroze/ngInfiniteScroll@1.2.1",
@@ -68,10 +69,14 @@ System.config({
     "github:angular/bower-angular-sanitize@1.4.7": {
       "angular": "github:angular/bower-angular@1.4.7"
     },
-    "github:angular/bower-material@0.11.3": {
+    "github:angular/bower-material@0.11.4": {
       "angular": "github:angular/bower-angular@1.4.7",
       "angular-animate": "github:angular/bower-angular-animate@1.4.7",
       "angular-aria": "github:angular/bower-angular-aria@1.4.7",
+      "css": "github:systemjs/plugin-css@0.1.18"
+    },
+    "github:chieffancypants/angular-loading-bar@0.8.0": {
+      "angular": "github:angular/bower-angular@1.4.7",
       "css": "github:systemjs/plugin-css@0.1.18"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -136,7 +141,7 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:clean-css@3.4.5": {
+    "npm:clean-css@3.4.6": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "commander": "npm:commander@2.8.1",
       "fs": "github:jspm/nodelibs-fs@0.1.2",

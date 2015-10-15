@@ -10,7 +10,7 @@ This app is currently under development, so just a few package groups have been 
 
 ## Usage
 
-Installing the dependancies.
+Installing the dependencies.
 
 ```shell
 $ npm install
