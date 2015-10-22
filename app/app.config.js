@@ -8,12 +8,27 @@ configure.$inject = [
   '$stateProvider',
   '$mdThemingProvider',
   '$compileProvider',
+  '$provide',
   'cfpLoadingBarProvider'
 ];
-export function configure($urlRouterProvider, $stateProvider, $mdThemingProvider, $compileProvider, cfpLoadingBarProvider) {
+export function configure($urlRouterProvider, $stateProvider, $mdThemingProvider, $compileProvider, $provide, cfpLoadingBarProvider) {
   // red, pink, purple, deep-purple, indigo, blue, light-blue, cyan, teal, green,
   // light-green, lime, yellow, amber, orange, deep-orange, brown, grey, blue-grey
   $compileProvider.debugInfoEnabled(true);
+
+  $provide.decorator('$exceptionHandler', ['$delegate', '$injector', function($delegate, $injector) {
+    return function(exception, cause) {
+      $delegate(exception, cause);
+
+      var $mdToast = $injector.get('$mdToast');
+      $mdToast.show(
+        $mdToast
+          .simple()
+          .content(exception && exception.message || 'Unknown error')
+          .hideDelay(3000)
+      );
+    }
+  }]);
 
   cfpLoadingBarProvider.includeSpinner = false;
 

@@ -3,9 +3,10 @@
 JspmService.$inject = [
   '$http',
   '$q',
-  '$window'
+  '$window',
+  '$exceptionHandler'
 ];
-export function JspmService($http, $q, $window) {
+export function JspmService($http, $q, $window, $exceptionHandler) {
 
   const CACHE_EXPIRATION = 24 * 60 * 60 * 1000;
   const JSPM_ETAG_KEY = 'jspm-registry-json-etag';
@@ -44,9 +45,16 @@ export function JspmService($http, $q, $window) {
         });
         response.total = response.results.length;
 
-        $window.localStorage.setItem(JSPM_ETAG_KEY, headers('Etag'));
-        $window.localStorage.setItem(JSOM_REGISTRY_JSON_KEY, JSON.stringify({since: Date.now(), data: response}));
-
+        try {
+          $window.localStorage.setItem(JSPM_ETAG_KEY, headers('Etag'));
+          $window.localStorage.setItem(JSOM_REGISTRY_JSON_KEY, JSON.stringify({
+            since: Date.now(),
+            data: response
+          }));
+        }
+        catch (err) {
+          $exceptionHandler(`[jspm] Failed to persist local storage data: ${err.message}`);
+        }
         return response;
       })
       .catch(error => {
@@ -54,8 +62,8 @@ export function JspmService($http, $q, $window) {
           if (cache && cache.data) {
             return $q.when(cache.data);
           }
-          return $q.when([]);
         }
+        return $q.when({total: 0, results: []});
       });
   }
 }

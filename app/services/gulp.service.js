@@ -4,9 +4,10 @@ GulpService.$inject = [
   '$http',
   '$window',
   '$q',
+  '$exceptionHandler',
   'app.services.search'
 ];
-export function GulpService($http, $window, $q, Search) {
+export function GulpService($http, $window, $q, $exceptionHandler, Search) {
 
   const CACHE_EXPIRATION = 24 * 60 * 60 * 1000;
   const BK_ETAG_KEY = 'gulp-black-list-etag';
@@ -30,8 +31,15 @@ export function GulpService($http, $window, $q, Search) {
             response.results = response.results.filter(item => !bs.hasOwnProperty(item.name));
             response.total = response.results.length;
 
-            $window.localStorage.setItem(GULP_LIST_KEY, JSON.stringify({since: Date.now(), data: response}));
-
+            try {
+              $window.localStorage.setItem(GULP_LIST_KEY, JSON.stringify({
+                since: Date.now(),
+                data: response
+              }));
+            }
+            catch (err) {
+              $exceptionHandler(`[gulp] Failed to persist local storage data: ${err.message}`);
+            }
             return response;
           });
       });
@@ -52,9 +60,13 @@ export function GulpService($http, $window, $q, Search) {
         let jsonData = atob(response.data.content);
         let items = JSON.parse(jsonData);
 
-        $window.localStorage.setItem(BK_ETAG_KEY, response.headers('Etag'));
-        $window.localStorage.setItem(BK_LIST_KEY, JSON.stringify({since: Date.now(), data: items}));
-
+        try {
+          $window.localStorage.setItem(BK_ETAG_KEY, response.headers('Etag'));
+          $window.localStorage.setItem(BK_LIST_KEY, JSON.stringify({since: Date.now(), data: items}));
+        }
+        catch (err) {
+          $exceptionHandler(`[gulp] Failed to persist local storage data: ${err.message}`);
+        }
         return items;
       })
       .catch(error => {
@@ -62,8 +74,8 @@ export function GulpService($http, $window, $q, Search) {
           if (cache && cache.data) {
             return $q.when(cache.data);
           }
-          return $q.when([]);
         }
+        return $q.when({});
       });
   }
 }

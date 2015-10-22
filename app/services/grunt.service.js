@@ -3,9 +3,10 @@
 GruntService.$inject = [
   '$window',
   '$q',
+  '$exceptionHandler',
   'app.services.search'
 ];
-export function GruntService($window, $q, Search) {
+export function GruntService($window, $q, $exceptionHandler, Search) {
 
   const CACHE_EXPIRATION = 24 * 60 * 60 * 1000;
   const GRUNT_LIST_KEY = 'grunt-list';
@@ -27,8 +28,15 @@ export function GruntService($window, $q, Search) {
             response.results = response.results.filter(item => !bs.hasOwnProperty(item.name));
             response.total = response.results.length;
 
-            $window.localStorage.setItem(GRUNT_LIST_KEY, JSON.stringify({since: Date.now(), data: response}));
-
+            try {
+              $window.localStorage.setItem(GRUNT_LIST_KEY, JSON.stringify({
+                since: Date.now(),
+                data: response
+              }));
+            }
+            catch (err) {
+              $exceptionHandler(`[grunt] Failed to persist local storage data: ${err.message}`);
+            }
             return response;
           });
       });
