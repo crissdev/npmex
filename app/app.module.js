@@ -1,7 +1,7 @@
 'use strict';
 
-import 'angular-material/angular-material.css!';
 import 'angular-loading-bar/src/loading-bar.css!';
+import 'angular-material/angular-material.css!';
 import angular from 'angular';
 import 'angular-animate';
 import 'angular-aria';
