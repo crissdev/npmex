@@ -76,7 +76,7 @@ export function SearchProvider() {
         }
       };
 
-      return $http.get('http://npmsearch.com/query', reqOptions)
+      return $http.get('https://npmsearch.com/query', reqOptions)
         .then(response => response.data);
     }
   }];
